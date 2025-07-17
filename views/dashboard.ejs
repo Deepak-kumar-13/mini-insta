@@ -1,0 +1,40 @@
+<!-- views/dashboard.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+  <h2>Welcome, <%= user.username %> 👋</h2>
+
+  <% if (error.length > 0) { %>
+    <p style="color: red;"><%= error[0] %></p>
+  <% } %>
+
+  <% if (success.length > 0) { %>
+    <p style="color: green;"><%= success[0] %></p>
+  <% } %>
+
+  <% posts.forEach(post => { %>
+    <div style="margin-bottom: 30px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+      <img src="<%= post.image %>" alt="image" style="max-width: 300px;" /><br />
+      <strong>👤 <%= post.user.username %></strong><br />
+      <p><%= post.caption %></p>
+      
+      <form action="/post/like/<%= post._id %>" method="POST" style="display: inline;">
+        <% if (post.likes.includes(user.username)) { %>
+          <button type="submit">❤️ Unlike</button>
+        <% } else { %>
+          <button type="submit">🤍 Like</button>
+        <% } %>
+      </form>
+
+      <p>👍 Likes: <%= post.likes.length %></p>
+    </div>
+  <% }) %>
+
+  <a href="/post/upload">📤 Upload New Post</a> |
+  <a href="/post/profile">👤 My Profile</a> |
+  <a href="/logout">🚪 Logout</a>
+</body>
+</html>

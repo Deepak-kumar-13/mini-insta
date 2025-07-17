@@ -1,0 +1,26 @@
+<!-- views/upload.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload Post</title>
+</head>
+<body>
+  <h2>Upload New Post</h2>
+
+  <% if (error.length > 0) { %>
+    <p style="color: red;"><%= error[0] %></p>
+  <% } %>
+
+  <% if (success.length > 0) { %>
+    <p style="color: green;"><%= success[0] %></p>
+  <% } %>
+
+  <form action="/post/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" required /><br /><br />
+    <textarea name="caption" placeholder="Enter caption" rows="3" cols="30"></textarea><br /><br />
+    <button type="submit">Upload</button>
+  </form>
+
+  <p><a href="/dashboard">⬅️ Back to Dashboard</a></p>
+</body>
+</html>
